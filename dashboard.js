@@ -1,5 +1,5 @@
 const URL = "https://rqegpmxhonhoisdlhujv.supabase.co/rest/v1/raceresults?order=id.desc&limit=2";
-const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxZWdwbXhob25ob2lzZGxodWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3Nzg3OTgsImV4cCI6MjA5NzM1NDc5OH0.nfK1nziAj9hF-sjrtWuRUS2MfyupU0xX7dVhHGNDP_w";
+const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxZWdwbXhob25ob2lzZGxodWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3Nzg3OTgsImV4cCI6MjA5NzM1NDc5OH0.nfK1nziAj9hF-sjrtWuRUS2MfyupU0xX7dVhHGNDP_w;
 
 // The existing Supabase URL and public key are restored above this comment.
 const POLL_INTERVAL_MS = 3000;
@@ -42,7 +42,8 @@ function calculateTotalTime(reaction, quarterEt) {
     const rt = timingNumber(reaction);
     const et = timingNumber(quarterEt);
     if (rt === null || et === null) return null;
-    const total = rt + et;
+    // Use the reaction's magnitude here; keep its sign for display and red lights.
+    const total = Math.abs(rt) + et;
     return Number.isFinite(total) ? total : null;
 }
 
